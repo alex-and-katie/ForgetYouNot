@@ -14,8 +14,8 @@ router.post('/', async (req, res, next) => {
       location: req.body.location,
       geoTaggedLocation: req.body.geoTaggedLocation, //get from API
       date: req.body.date,
-      audioPronunciation: req.body.audioPronunciation //get from API,
-      // userId: req.
+      audioPronunciation: req.body.audioPronunciation, //get from API,
+      userId: req.user.id
     })
     res.status(201).json(name)
   } catch (err) {
