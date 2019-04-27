@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-// import {me, settingUser} from '../store/user'//import thunks
+import {createName} from '../store/name'
 
 export class NewNameForm extends React.Component {
   constructor(props) {
@@ -40,7 +40,8 @@ export class NewNameForm extends React.Component {
     evt.preventDefault()
     // this.props.history.push('/checkout/confirmation') //can redirect to confirmation page
 
-    // call thunk to createNewAcquaintance in reducer/database
+    this.props.createName(this.state)
+    this.setState(this.initialState)
   }
 
   render() {
@@ -114,8 +115,7 @@ export class NewNameForm extends React.Component {
 
 //const mapDispatchToProps = {thunkName}
 const mapDispatchToProps = dispatch => ({
-  // getUser: () => dispatch(me()),
-  //thunk to addName
+  createName: name => dispatch(createName(name))
 })
 
 export default connect(null, mapDispatchToProps)(NewNameForm)
