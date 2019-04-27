@@ -2,7 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 // import {me, settingUser} from '../store/user'//import thunks
 
-class NewNameForm extends React.Component {
+export class NewNameForm extends React.Component {
   constructor(props) {
     super(props)
 
@@ -25,8 +25,8 @@ class NewNameForm extends React.Component {
   componentDidMount() {
     this.setState({
       ...this.state,
-      date: new Date().toJSON().slice(0, 10)
-      //geoTaggedLocation
+      date: new Date().toJSON().slice(0, 10),
+      geoTaggedLocation: 'Feature coming soon!'
     })
   }
 
@@ -45,79 +45,66 @@ class NewNameForm extends React.Component {
 
   render() {
     return (
-      <div className="checkoutFormstyle">
-        <h2>Checkout</h2>
+      <div className="checkoutForm">
+        <h2>Grab that Name!</h2>
         <form onSubmit={this.handleSubmit}>
           <div>
-            <h3>Contact</h3>
+            <label htmlFor="name">Name:</label>
             <input
               className="longForm"
-              name="email"
+              name="name"
               type="text"
-              value={this.state.email}
-              placeholder="Email"
+              value={this.state.name}
+              placeholder="Quick! Before you forget!"
               onChange={this.handleChange}
             />
-            <h3>Shipping</h3>
+            <label htmlFor="meetingSummary">Meeting Summary:</label>
             <input
               className="longForm"
-              name="streetAddress"
+              name="meetingSummary"
               type="text"
-              placeholder="Street Address"
-              value={this.state.streetAddress}
+              placeholder="Summary"
+              value={this.state.meetingSummary}
               onChange={this.handleChange}
             />
             <br />
+            <label htmlFor="physicalDescription">Physical Description:</label>
             <input
-              name="city"
+              name="physicalDescription"
               type="text"
-              placeholder="City"
-              value={this.state.city}
+              // placeholder=""
+              value={this.state.physicalDescription}
               onChange={this.handleChange}
             />
+            <label htmlFor="pronunciation">Pronunciation:</label>
             <input
-              name="state"
+              name="pronunciation"
               type="text"
-              placeholder="State"
-              value={this.state.state}
+              // placeholder=""
+              value={this.state.pronunciation}
               onChange={this.handleChange}
             />
+            <label htmlFor="location">Location:</label>
             <input
-              name="zipCode"
+              name="location"
               type="text"
-              placeholder="Zip Code"
-              value={this.state.zipCode}
+              placeholder="Where'd ya meet?"
+              value={this.state.location}
               onChange={this.handleChange}
             />
-            <h3>Billing</h3>
-            <input
-              className="longForm"
-              name="creditCardNumber"
-              type="password"
-              placeholder="Credit Card Number"
-              value={this.state.creditCardNumber}
-              onChange={this.handleChange}
-            />
+            <label htmlFor="geoTaggedLocation">Mapped as:</label>
+            <p className="longForm">{this.state.geoTaggedLocation}</p>
             <br />
-            <input
-              name="cvv"
-              type="password"
-              placeholder="CVV"
-              value={this.state.cvv}
-              onChange={this.handleChange}
-            />
-            <input
-              name="expDate"
-              type="text"
-              placeholder="Expiration Date"
-              value={this.state.expDate}
-              onChange={this.handleChange}
-            />
+            <label htmlFor="date">Date:</label>
+            <p className="longForm">{this.state.date}</p>
+            <br />
+            <label htmlFor="audioPronunciation">Record Name</label>
+            <p className="longForm">Record Here!</p>
           </div>
           <br />
 
           <button id="checkoutSubmitBtn" type="submit">
-            Complete Purchase
+            Save that Name!
           </button>
         </form>
       </div>
@@ -125,16 +112,10 @@ class NewNameForm extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({
-  user: state.user
-})
-
+//const mapDispatchToProps = {thunkName}
 const mapDispatchToProps = dispatch => ({
-  getUser: () => dispatch(me()),
-  clearCart: () => clearCart(),
-  settingUser: user => dispatch(settingUser(user))
+  // getUser: () => dispatch(me()),
+  //thunk to addName
 })
 
-export const CheckoutForm = connect(mapStateToProps, mapDispatchToProps)(
-  CheckoutFormView
-)
+export default connect(null, mapDispatchToProps)(NewNameForm)

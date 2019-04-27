@@ -19,3 +19,17 @@ form div {
   margin: 1em;
   display: inline-block;
 }
+
+.checkoutForm {
+  margin-left: 20px;
+}
+​ .longForm {
+  width: 250px;
+}
+​ #checkoutSubmitBtn {
+  font-size: 18px;
+  color: white;
+  background-color: #e10b7e;
+  border-radius: 25px;
+  width: 220px;
+}
