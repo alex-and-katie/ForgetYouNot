@@ -23,7 +23,7 @@ async function seed() {
       location: 'Grace Hopper Campus',
       geoTaggedLocation:
         '{"location":{"lat":33.3632256,"lng":-117.0874871},"accuracy":20}',
-      date: Date(Date.now())
+      date: new Date().toJSON().slice(0, 10)
     })
   ])
 
