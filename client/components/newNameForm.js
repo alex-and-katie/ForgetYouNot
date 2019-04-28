@@ -112,19 +112,17 @@ export class NewNameForm extends React.Component {
             <br />
             <label htmlFor="audioPronunciation">Record Name</label>
             <div>
-              {this.state.recordingStatus ? (
-                <div>
-                  <button type="button" onClick={this.handleClick}>
-                    Stop
-                  </button>
-                </div>
-              ) : (
-                <div>
-                  <button type="button" onClick={this.handleClick}>
-                    Start
-                  </button>
-                </div>
-              )}
+              <p>
+                <button id="record" disabled>
+                  Record audio
+                </button>{' '}
+                <button id="stop" disabled>
+                  Stop
+                </button>
+              </p>
+              <p>
+                <audio id="audio" controls />
+              </p>
             </div>
           </div>
           <br />
