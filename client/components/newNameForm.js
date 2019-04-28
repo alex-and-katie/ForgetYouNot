@@ -39,7 +39,8 @@ export class NewNameForm extends React.Component {
   }
 
   handleClick(evt) {
-    evt.preventDefault()
+    // evt.preventDefault()
+    console.log('button clicked!')
     this.setState({
       ...this.state,
       recordingStatus: !this.recordingStatus
@@ -110,9 +111,21 @@ export class NewNameForm extends React.Component {
             <p className="longForm">{this.state.date}</p>
             <br />
             <label htmlFor="audioPronunciation">Record Name</label>
-            <button onClick={this.handleClick}>
-              {this.state.recordingStatus}
-            </button>
+            <div>
+              {this.state.recordingStatus ? (
+                <div>
+                  <button type="button" onClick={this.handleClick}>
+                    Stop
+                  </button>
+                </div>
+              ) : (
+                <div>
+                  <button type="button" onClick={this.handleClick}>
+                    Start
+                  </button>
+                </div>
+              )}
+            </div>
           </div>
           <br />
 
