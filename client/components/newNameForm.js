@@ -18,15 +18,16 @@ export class NewNameForm extends React.Component {
       recordingStatus: false
     }
     this.state = this.initialState
+    this.recorder = null
 
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
-    this.handleClick = this.handleClick.bind(this)
+    this.handleClickStart = this.handleClickStart.bind(this)
+    this.handleClickStop = this.handleClickStop.bind(this)
   }
 
   componentDidMount() {
     this.setState({
-      ...this.state,
       date: new Date().toJSON().slice(0, 10),
       geoTaggedLocation: 'Feature coming soon!'
     })
@@ -38,19 +39,39 @@ export class NewNameForm extends React.Component {
     })
   }
 
-  handleClick(evt) {
-    // evt.preventDefault()
-    console.log('button clicked!')
+  handleReceivedData(evt) {
+    console.log('Inside handleReceivedData')
+    const {data} = evt
+    console.log('Data from ondataavailable event', data)
+  }
+
+  async handleClickStart(evt) {
     this.setState({
-      ...this.state,
-      recordingStatus: !this.recordingStatus
+      recordingStatus: true
     })
+    //get audio stream from user's mic //also prompts permission for mic //returns a stream
+    const stream = await navigator.mediaDevices.getUserMedia({
+      audio: true
+    })
+    this.recorder = new MediaRecorder(stream) //recording has start, stop, and ondataavailable
+    this.recorder.ondataavailable = evt => this.handleReceivedData(evt)
+    this.recorder.start()
+    //this.recorder.ondataavailable = function set on class (when we have data, we call a function with this data as a parameter)
+    //assign this data to audio tag
+    //onrecordingready ==> thing receiving data
+    //grab this new url and hook it into the audio tag
+  }
+
+  handleClickStop(evt) {
+    this.setState({
+      recordingStatus: false
+    })
+    this.recorder.stop()
   }
 
   handleSubmit(evt) {
     evt.preventDefault()
     // this.props.history.push('/checkout/confirmation') //can redirect to confirmation page
-
     this.props.createName(this.state)
     this.setState(this.initialState)
   }
@@ -113,10 +134,10 @@ export class NewNameForm extends React.Component {
             <label htmlFor="audioPronunciation">Record Name</label>
             <div>
               <p>
-                <button id="record" disabled>
-                  Record audio
+                <button onClick={this.handleClickStart} id="start">
+                  Start
                 </button>{' '}
-                <button id="stop" disabled>
+                <button onClick={this.handleClickStop} id="stop">
                   Stop
                 </button>
               </p>
