@@ -90,82 +90,96 @@ export class NewNameForm extends React.Component {
 
   render() {
     return (
-      <div className="checkoutForm">
-        <h2>Grab that Name!</h2>
-        <form onSubmit={this.handleSubmit}>
-          <div>
-            <label htmlFor="name">Name:</label>
-            <input
-              className="longForm"
-              name="name"
-              type="text"
-              value={this.state.name}
-              placeholder="Quick! Before you forget!"
-              onChange={this.handleChange}
-            />
-            <label htmlFor="meetingSummary">Meeting Summary:</label>
-            <input
-              className="longForm"
-              name="meetingSummary"
-              type="text"
-              placeholder="Summary"
-              value={this.state.meetingSummary}
-              onChange={this.handleChange}
-            />
-            <br />
-            <label htmlFor="physicalDescription">Physical Description:</label>
-            <input
-              name="physicalDescription"
-              type="text"
-              // placeholder=""
-              value={this.state.physicalDescription}
-              onChange={this.handleChange}
-            />
-            <label htmlFor="location">Location:</label>
-            <input
-              name="location"
-              type="text"
-              placeholder="Where'd ya meet?"
-              value={this.state.location}
-              onChange={this.handleChange}
-            />
-            <label htmlFor="geoTaggedLocation">Mapped as:</label>
-            <p className="longForm">{this.state.geoTaggedLocation}</p>
-            <br />
-            <label htmlFor="date">Date:</label>
-            <p className="longForm">{this.state.date}</p>
-            <br />
-            <label htmlFor="audioPronunciation">Record Name</label>
-            <div>
-              <p>
-                <button
-                  type="button"
-                  onClick={this.handleClickStart}
-                  id="start"
-                  disabled={this.state.startDisabled}
-                >
-                  Start
-                </button>{' '}
-                <button
-                  type="button"
-                  onClick={this.handleClickStop}
-                  id="stop"
-                  disabled={this.state.stopDisabled}
-                >
-                  Stop
-                </button>
-              </p>
-              <p>
-                <audio src={this.state.audioURL} id="audio" controls />
-              </p>
+      <div>
+        <div className="container-fluid">
+          <div className="row">
+            <div className="col-sm">
+              <h2>Grab that Name!</h2>
             </div>
           </div>
-          <br />
+        </div>
+        <div className="container">
+          <form onSubmit={this.handleSubmit}>
+            <div>
+              <div className="row">
+                <div className="col-sm">
+                  <label htmlFor="name">Name:</label>
+                </div>
+                <div className="col-sm">
+                  <input
+                    name="name"
+                    type="text"
+                    value={this.state.name}
+                    placeholder="Quick! Before you forget!"
+                    onChange={this.handleChange}
+                  />
+                </div>
+              </div>
 
-          <button id="checkoutSubmitBtn" type="submit">
-            Save that Name!
-          </button>
-        </form>
+              <label htmlFor="meetingSummary">Meeting Summary:</label>
+              <input
+                className="longForm"
+                name="meetingSummary"
+                type="text"
+                placeholder="Summary"
+                value={this.state.meetingSummary}
+                onChange={this.handleChange}
+              />
+              <br />
+              <label htmlFor="physicalDescription">Physical Description:</label>
+              <input
+                name="physicalDescription"
+                type="text"
+                // placeholder=""
+                value={this.state.physicalDescription}
+                onChange={this.handleChange}
+              />
+              <label htmlFor="location">Location:</label>
+              <input
+                name="location"
+                type="text"
+                placeholder="Where'd ya meet?"
+                value={this.state.location}
+                onChange={this.handleChange}
+              />
+              <label htmlFor="geoTaggedLocation">Mapped as:</label>
+              <p className="longForm">{this.state.geoTaggedLocation}</p>
+              <br />
+              <label htmlFor="date">Date:</label>
+              <p className="longForm">{this.state.date}</p>
+              <br />
+              <label htmlFor="audioPronunciation">Record Name</label>
+              <div>
+                <p>
+                  <button
+                    type="button"
+                    onClick={this.handleClickStart}
+                    id="start"
+                    disabled={this.state.startDisabled}
+                  >
+                    Start
+                  </button>{' '}
+                  <button
+                    type="button"
+                    onClick={this.handleClickStop}
+                    id="stop"
+                    disabled={this.state.stopDisabled}
+                  >
+                    Stop
+                  </button>
+                </p>
+                <p>
+                  <audio src={this.state.audioURL} id="audio" controls />
+                </p>
+              </div>
+            </div>
+            <br />
+
+            <button id="checkoutSubmitBtn" type="submit">
+              Save that Name!
+            </button>
+          </form>
+        </div>
       </div>
     )
   }

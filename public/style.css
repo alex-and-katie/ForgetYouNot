@@ -6,33 +6,33 @@ a {
   text-decoration: none;
 }
 
-label {
+/* label {
   display: block;
-}
+} */
 
 nav a {
   display: inline-block;
   margin: 1em;
 }
 
-form div {
+/* form div {
   margin: 1em;
   display: inline-block;
-}
+} */
 
-.checkoutForm {
+/* .checkoutForm {
   margin-left: 20px;
 }
 ​ .longForm {
   width: 250px;
-}
-​ #checkoutSubmitBtn {
+} */
+/* ​ #checkoutSubmitBtn {
   font-size: 18px;
   color: white;
   background-color: #e10b7e;
   border-radius: 25px;
   width: 220px;
-}
+} */
 
 button {
   border: 0;
