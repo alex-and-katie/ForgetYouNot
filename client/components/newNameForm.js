@@ -15,7 +15,8 @@ export class NewNameForm extends React.Component {
       geoTaggedLocation: '', //get from API
       date: '',
       audioPronunciation: '', //get from API
-      recordingStatus: false
+      recordingStatus: false,
+      audioURL: ''
     }
     this.state = this.initialState
     this.recorder = null
@@ -24,6 +25,7 @@ export class NewNameForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleClickStart = this.handleClickStart.bind(this)
     this.handleClickStop = this.handleClickStop.bind(this)
+    this.handleReceivedData = this.handleReceivedData.bind(this)
   }
 
   componentDidMount() {
@@ -40,10 +42,19 @@ export class NewNameForm extends React.Component {
   }
 
   handleReceivedData(evt) {
-    console.log('Inside handleReceivedData')
-    const {data} = evt
+    const {data} = evt //data is BLOB, eventually may want to send it back to database on submit, possibly by storing it on state
     console.log('Data from ondataavailable event', data)
+    const recordedAudioURL = URL.createObjectURL(data)
+    console.log('recordedAudioURL:', recordedAudioURL)
+    this.setState({
+      audioURL: recordedAudioURL
+    })
   }
+
+  // handleReceivedData(evt) {
+  //   const {data} = evt
+  //   const recordedAudioURL = URL.createObjectURL(data)
+  // }
 
   async handleClickStart(evt) {
     this.setState({
@@ -142,7 +153,7 @@ export class NewNameForm extends React.Component {
                 </button>
               </p>
               <p>
-                <audio id="audio" controls />
+                <audio src={this.state.audioURL} id="audio" controls />
               </p>
             </div>
           </div>
