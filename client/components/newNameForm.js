@@ -10,23 +10,27 @@ export class NewNameForm extends React.Component {
       name: '',
       meetingSummary: '',
       physicalDescription: '',
-      pronunciation: '',
       location: '',
       geoTaggedLocation: '', //get from API
       date: '',
       audioPronunciation: '', //get from API
-      recordingStatus: false
+      recordingStatus: false,
+      audioURL: '',
+      startDisabled: false,
+      stopDisabled: true
     }
     this.state = this.initialState
+    this.recorder = null
 
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
-    this.handleClick = this.handleClick.bind(this)
+    this.handleClickStart = this.handleClickStart.bind(this)
+    this.handleClickStop = this.handleClickStop.bind(this)
+    this.handleReceivedData = this.handleReceivedData.bind(this)
   }
 
   componentDidMount() {
     this.setState({
-      ...this.state,
       date: new Date().toJSON().slice(0, 10),
       geoTaggedLocation: 'Feature coming soon!'
     })
@@ -38,21 +42,50 @@ export class NewNameForm extends React.Component {
     })
   }
 
-  handleClick(evt) {
-    // evt.preventDefault()
-    console.log('button clicked!')
+  handleReceivedData(evt) {
+    const {data} = evt //data is BLOB, eventually may want to send it back to database on submit, possibly by storing it on state
+    console.log('Data from ondataavailable event', data)
+    const recordedAudioURL = URL.createObjectURL(data)
+    console.log('recordedAudioURL:', recordedAudioURL)
     this.setState({
-      ...this.state,
-      recordingStatus: !this.recordingStatus
+      audioURL: recordedAudioURL,
+      audioPronunciation: data
     })
+  }
+
+  async handleClickStart(evt) {
+    this.setState({
+      recordingStatus: true,
+      startDisabled: true,
+      stopDisabled: false
+    })
+    //get audio stream from user's mic //also prompts permission for mic //returns a stream
+    const stream = await navigator.mediaDevices.getUserMedia({
+      audio: true
+    })
+    this.recorder = new MediaRecorder(stream) //recording has start, stop, and ondataavailable
+    this.recorder.ondataavailable = evt => this.handleReceivedData(evt)
+    this.recorder.start()
+  }
+
+  handleClickStop(evt) {
+    this.setState({
+      recordingStatus: false,
+      startDisabled: false,
+      stopDisabled: true
+    })
+    this.recorder.stop()
   }
 
   handleSubmit(evt) {
     evt.preventDefault()
     // this.props.history.push('/checkout/confirmation') //can redirect to confirmation page
-
     this.props.createName(this.state)
-    this.setState(this.initialState)
+    this.setState({
+      ...this.initialState,
+      date: new Date().toJSON().slice(0, 10),
+      geoTaggedLocation: 'Feature coming soon!'
+    })
   }
 
   render() {
@@ -88,14 +121,6 @@ export class NewNameForm extends React.Component {
               value={this.state.physicalDescription}
               onChange={this.handleChange}
             />
-            <label htmlFor="pronunciation">Pronunciation:</label>
-            <input
-              name="pronunciation"
-              type="text"
-              // placeholder=""
-              value={this.state.pronunciation}
-              onChange={this.handleChange}
-            />
             <label htmlFor="location">Location:</label>
             <input
               name="location"
@@ -113,15 +138,25 @@ export class NewNameForm extends React.Component {
             <label htmlFor="audioPronunciation">Record Name</label>
             <div>
               <p>
-                <button id="record" disabled>
-                  Record audio
+                <button
+                  type="button"
+                  onClick={this.handleClickStart}
+                  id="start"
+                  disabled={this.state.startDisabled}
+                >
+                  Start
                 </button>{' '}
-                <button id="stop" disabled>
+                <button
+                  type="button"
+                  onClick={this.handleClickStop}
+                  id="stop"
+                  disabled={this.state.stopDisabled}
+                >
                   Stop
                 </button>
               </p>
               <p>
-                <audio id="audio" controls />
+                <audio src={this.state.audioURL} id="audio" controls />
               </p>
             </div>
           </div>
