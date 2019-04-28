@@ -1,5 +1,5 @@
 body {
-  font-family: sans-serif;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 a {
@@ -20,23 +20,26 @@ form div {
   display: inline-block;
 }
 
-.checkoutForm {
+/* .newNameForm {
   margin-left: 20px;
-}
-​ .longForm {
-  width: 250px;
-}
+} */
+/* ​ .longForm {
+  width: 500px;
+} */
 ​ #checkoutSubmitBtn {
-  font-size: 18px;
-  color: white;
-  background-color: #e10b7e;
-  border-radius: 25px;
-  width: 220px;
+  text-align: center;
+}
+
+.submitDiv {
+  display: flex;
+  justify-content: center;
 }
 
 button {
   border: 0;
-  background: #31ffd5;
+  /* background: #31ffd5; */
+  background-color: rgb(117 13 35);
+  color: white;
   font-family: Courier, 'Courier New', monospace;
   font-size: 1rem;
   padding: 0.5em 1em;
@@ -51,4 +54,58 @@ button:hover {
 button[disabled] {
   background: #ccc;
   color: #000;
+}
+
+.formHeader {
+  display: flex;
+  justify-content: center;
+  margin-left: 0;
+}
+
+h1 {
+  display: flex;
+  justify-content: center;
+}
+
+.navBarLinks2 {
+  display: flex;
+  justify-content: space-around;
+}
+
+.formItem {
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  margin-right: 50px;
+}
+
+input {
+  border: 1px solid gray;
+  /* width: 200px;
+  height:  */
+}
+
+.audioDiv {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+#recordName {
+  margin-left: 16px;
+}
+
+body {
+  background-color: rosybrown;
+}
+
+.formComponent {
+}
+
+h1 {
+  font-size: 3rem;
+}
+
+label {
+  font-size: 0.5 rem;
 }
