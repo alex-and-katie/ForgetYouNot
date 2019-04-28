@@ -123,7 +123,7 @@ export class NewNameForm extends React.Component {
                 <input
                   name="physicalDescription"
                   type="text"
-                  placeholder="Recognize 'em next time"
+                  placeholder="Recognize 'em"
                   value={this.state.physicalDescription}
                   onChange={this.handleChange}
                 />
