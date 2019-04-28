@@ -19,11 +19,11 @@ async function seed() {
       meetingSummary:
         'first day at GH, very warm and welcoming, would like to work with later',
       physicalDescription: 'Pretty, brunette, slim, great smile',
-      pronunciation: 'KAY-TIE',
       location: 'Grace Hopper Campus',
       geoTaggedLocation:
         '{"location":{"lat":33.3632256,"lng":-117.0874871},"accuracy":20}',
-      date: new Date().toJSON().slice(0, 10)
+      date: new Date().toJSON().slice(0, 10),
+      audioPronunciation: ''
     })
   ])
 

@@ -10,7 +10,6 @@ router.post('/', async (req, res, next) => {
       name: req.body.name,
       meetingSummary: req.body.meetingSummary,
       physicalDescription: req.body.physicalDescription,
-      pronunciation: req.body.pronunciation,
       location: req.body.location,
       geoTaggedLocation: req.body.geoTaggedLocation, //get from API
       date: req.body.date,

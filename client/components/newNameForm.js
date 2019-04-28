@@ -10,13 +10,14 @@ export class NewNameForm extends React.Component {
       name: '',
       meetingSummary: '',
       physicalDescription: '',
-      pronunciation: '',
       location: '',
       geoTaggedLocation: '', //get from API
       date: '',
       audioPronunciation: '', //get from API
       recordingStatus: false,
-      audioURL: ''
+      audioURL: '',
+      startDisabled: false,
+      stopDisabled: true
     }
     this.state = this.initialState
     this.recorder = null
@@ -52,14 +53,11 @@ export class NewNameForm extends React.Component {
     })
   }
 
-  // handleReceivedData(evt) {
-  //   const {data} = evt
-  //   const recordedAudioURL = URL.createObjectURL(data)
-  // }
-
   async handleClickStart(evt) {
     this.setState({
-      recordingStatus: true
+      recordingStatus: true,
+      startDisabled: true,
+      stopDisabled: false
     })
     //get audio stream from user's mic //also prompts permission for mic //returns a stream
     const stream = await navigator.mediaDevices.getUserMedia({
@@ -68,15 +66,13 @@ export class NewNameForm extends React.Component {
     this.recorder = new MediaRecorder(stream) //recording has start, stop, and ondataavailable
     this.recorder.ondataavailable = evt => this.handleReceivedData(evt)
     this.recorder.start()
-    //this.recorder.ondataavailable = function set on class (when we have data, we call a function with this data as a parameter)
-    //assign this data to audio tag
-    //onrecordingready ==> thing receiving data
-    //grab this new url and hook it into the audio tag
   }
 
   handleClickStop(evt) {
     this.setState({
-      recordingStatus: false
+      recordingStatus: false,
+      startDisabled: false,
+      stopDisabled: true
     })
     this.recorder.stop()
   }
@@ -85,7 +81,11 @@ export class NewNameForm extends React.Component {
     evt.preventDefault()
     // this.props.history.push('/checkout/confirmation') //can redirect to confirmation page
     this.props.createName(this.state)
-    this.setState(this.initialState)
+    this.setState({
+      ...this.initialState,
+      date: new Date().toJSON().slice(0, 10),
+      geoTaggedLocation: 'Feature coming soon!'
+    })
   }
 
   render() {
@@ -121,14 +121,6 @@ export class NewNameForm extends React.Component {
               value={this.state.physicalDescription}
               onChange={this.handleChange}
             />
-            <label htmlFor="pronunciation">Pronunciation:</label>
-            <input
-              name="pronunciation"
-              type="text"
-              // placeholder=""
-              value={this.state.pronunciation}
-              onChange={this.handleChange}
-            />
             <label htmlFor="location">Location:</label>
             <input
               name="location"
@@ -146,10 +138,20 @@ export class NewNameForm extends React.Component {
             <label htmlFor="audioPronunciation">Record Name</label>
             <div>
               <p>
-                <button onClick={this.handleClickStart} id="start">
+                <button
+                  type="button"
+                  onClick={this.handleClickStart}
+                  id="start"
+                  disabled={this.state.startDisabled}
+                >
                   Start
                 </button>{' '}
-                <button onClick={this.handleClickStop} id="stop">
+                <button
+                  type="button"
+                  onClick={this.handleClickStop}
+                  id="stop"
+                  disabled={this.state.stopDisabled}
+                >
                   Stop
                 </button>
               </p>

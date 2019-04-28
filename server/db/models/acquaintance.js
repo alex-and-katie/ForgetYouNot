@@ -5,15 +5,15 @@ const Acquaintance = db.define('acquaintance', {
   name: {
     type: Sequelize.STRING,
     allowNull: false
+    // validate: {
+    //   notEmpty: true
+    // }
   },
   meetingSummary: {
     type: Sequelize.TEXT
   },
   physicalDescription: {
     type: Sequelize.TEXT
-  },
-  pronunciation: {
-    type: Sequelize.STRING
   },
   location: {
     type: Sequelize.STRING
