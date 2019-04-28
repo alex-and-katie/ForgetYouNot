@@ -47,7 +47,8 @@ export class NewNameForm extends React.Component {
     const recordedAudioURL = URL.createObjectURL(data)
     console.log('recordedAudioURL:', recordedAudioURL)
     this.setState({
-      audioURL: recordedAudioURL
+      audioURL: recordedAudioURL,
+      audioPronunciation: data
     })
   }
 
