@@ -14,12 +14,14 @@ export class NewNameForm extends React.Component {
       location: '',
       geoTaggedLocation: '', //get from API
       date: '',
-      audioPronunciation: '' //get from API
+      audioPronunciation: '', //get from API
+      recordingStatus: false
     }
     this.state = this.initialState
 
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleClick = this.handleClick.bind(this)
   }
 
   componentDidMount() {
@@ -33,6 +35,14 @@ export class NewNameForm extends React.Component {
   handleChange(evt) {
     this.setState({
       [evt.target.name]: evt.target.value
+    })
+  }
+
+  handleClick(evt) {
+    evt.preventDefault()
+    this.setState({
+      ...this.state,
+      recordingStatus: !this.recordingStatus
     })
   }
 
@@ -100,7 +110,9 @@ export class NewNameForm extends React.Component {
             <p className="longForm">{this.state.date}</p>
             <br />
             <label htmlFor="audioPronunciation">Record Name</label>
-            <p className="longForm">Record Here!</p>
+            <button onClick={this.handleClick}>
+              {this.state.recordingStatus}
+            </button>
           </div>
           <br />
 
