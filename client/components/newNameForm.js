@@ -90,82 +90,101 @@ export class NewNameForm extends React.Component {
 
   render() {
     return (
-      <div className="checkoutForm">
-        <h2>Grab that Name!</h2>
-        <form onSubmit={this.handleSubmit}>
-          <div>
-            <label htmlFor="name">Name:</label>
-            <input
-              className="longForm"
-              name="name"
-              type="text"
-              value={this.state.name}
-              placeholder="Quick! Before you forget!"
-              onChange={this.handleChange}
-            />
-            <label htmlFor="meetingSummary">Meeting Summary:</label>
-            <input
-              className="longForm"
-              name="meetingSummary"
-              type="text"
-              placeholder="Summary"
-              value={this.state.meetingSummary}
-              onChange={this.handleChange}
-            />
-            <br />
-            <label htmlFor="physicalDescription">Physical Description:</label>
-            <input
-              name="physicalDescription"
-              type="text"
-              // placeholder=""
-              value={this.state.physicalDescription}
-              onChange={this.handleChange}
-            />
-            <label htmlFor="location">Location:</label>
-            <input
-              name="location"
-              type="text"
-              placeholder="Where'd ya meet?"
-              value={this.state.location}
-              onChange={this.handleChange}
-            />
-            <label htmlFor="geoTaggedLocation">Mapped as:</label>
-            <p className="longForm">{this.state.geoTaggedLocation}</p>
-            <br />
-            <label htmlFor="date">Date:</label>
-            <p className="longForm">{this.state.date}</p>
-            <br />
-            <label htmlFor="audioPronunciation">Record Name</label>
+      <div className="formComponent">
+        <h2 className="formHeader">Grab that Name!</h2>
+        <div className="newNameForm">
+          <form onSubmit={this.handleSubmit}>
             <div>
-              <p>
-                <button
-                  type="button"
-                  onClick={this.handleClickStart}
-                  id="start"
-                  disabled={this.state.startDisabled}
-                >
-                  Start
-                </button>{' '}
-                <button
-                  type="button"
-                  onClick={this.handleClickStop}
-                  id="stop"
-                  disabled={this.state.stopDisabled}
-                >
-                  Stop
-                </button>
-              </p>
-              <p>
-                <audio src={this.state.audioURL} id="audio" controls />
-              </p>
-            </div>
-          </div>
-          <br />
+              <div className="formItem">
+                <label htmlFor="name">Name:</label>
+                <input
+                  name="name"
+                  type="text"
+                  value={this.state.name}
+                  placeholder="Before you forget :)"
+                  onChange={this.handleChange}
+                />
+              </div>
+              <div className="formItem">
+                <label htmlFor="meetingSummary">Meeting Summary:</label>
+                <input
+                  className="input"
+                  name="meetingSummary"
+                  type="text"
+                  placeholder="Summary"
+                  value={this.state.meetingSummary}
+                  onChange={this.handleChange}
+                />
+              </div>
+              <div className="formItem">
+                <label htmlFor="physicalDescription">
+                  Physical Description:
+                </label>
+                <input
+                  name="physicalDescription"
+                  type="text"
+                  placeholder="Recognize 'em next time"
+                  value={this.state.physicalDescription}
+                  onChange={this.handleChange}
+                />
+              </div>
+              <div className="formItem">
+                <label htmlFor="location">Location:</label>
+                <input
+                  name="location"
+                  type="text"
+                  placeholder="Where'd ya meet?"
+                  value={this.state.location}
+                  onChange={this.handleChange}
+                />
+              </div>
+              {/* <div className="formItem">
+                <label htmlFor="geoTaggedLocation">Mapped as:</label>
+                <p className="longForm">{this.state.geoTaggedLocation}</p>
+              </div> */}
+              <div className="formItem">
+                <label htmlFor="date">Date:</label>
+                <input value={this.state.date} readOnly />
+              </div>
+              <label id="recordName" htmlFor="audioPronunciation">
+                Record Name:
+              </label>
 
-          <button id="checkoutSubmitBtn" type="submit">
-            Save that Name!
-          </button>
-        </form>
+              {/* audio */}
+              <div className="audioDiv">
+                <div>
+                  <p>
+                    <button
+                      type="button"
+                      onClick={this.handleClickStart}
+                      id="start"
+                      disabled={this.state.startDisabled}
+                    >
+                      Start
+                    </button>{' '}
+                    <button
+                      type="button"
+                      onClick={this.handleClickStop}
+                      id="stop"
+                      disabled={this.state.stopDisabled}
+                    >
+                      Stop
+                    </button>
+                  </p>
+                  <p>
+                    <audio src={this.state.audioURL} id="audio" controls />
+                  </p>
+                </div>
+              </div>
+              {/* above is audio */}
+            </div>
+            <div className="submitDiv">
+              <button id="checkoutSubmitBtn" type="submit">
+                Save that Name!
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
     )
   }
