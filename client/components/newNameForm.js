@@ -111,7 +111,7 @@ export class NewNameForm extends React.Component {
                   className="input"
                   name="meetingSummary"
                   type="text"
-                  placeholder="Summary"
+                  placeholder="Meet Cute? Meet Ugly?"
                   value={this.state.meetingSummary}
                   onChange={this.handleChange}
                 />
