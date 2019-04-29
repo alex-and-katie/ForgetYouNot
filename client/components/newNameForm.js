@@ -42,9 +42,9 @@ export class NewNameForm extends React.Component {
     })
   }
 
-  handleReceivedData(evt) {
-    const {data} = evt //data is BLOB, eventually may want to send it back to database on submit, possibly by storing it on state
-    console.log('Data from ondataavailable event', data)
+  handleReceivedData(dataAvailableEvent) {
+    const {data} = dataAvailableEvent //data is BLOB
+    console.log('Data from dataavailable event', data)
     const recordedAudioURL = URL.createObjectURL(data)
     console.log('recordedAudioURL:', recordedAudioURL)
     this.setState({
@@ -63,8 +63,9 @@ export class NewNameForm extends React.Component {
     const stream = await navigator.mediaDevices.getUserMedia({
       audio: true
     })
-    this.recorder = new MediaRecorder(stream) //recording has start, stop, and ondataavailable
-    this.recorder.ondataavailable = evt => this.handleReceivedData(evt)
+    this.recorder = new MediaRecorder(stream) //recorder has start, stop, and ondataavailable
+    this.recorder.ondataavailable = dataAvailableEvent =>
+      this.handleReceivedData(dataAvailableEvent) //ondataavailable listener (method on instance) listens for dataAvailableEvent to fire, passes dataAvailableEvent to our callback function handleReceivedData
     this.recorder.start()
   }
 
