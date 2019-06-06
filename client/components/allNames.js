@@ -7,12 +7,21 @@ export class AllNames extends React.Component {
     this.props.fetchNames()
   }
 
-
+  render(){
+    console.log(this.props)
+    return(
+      <h1>allNames</h1>
+    )
+  }
 
 }
 
+const mapStateToProps = state => {
+  return {
+    allNames: state.allNames
+  }
+}
 
+const mapDispatchToProps = {fetchNames}
 
-
-
-export default connect(null, null)(AllNames)
+export default connect(mapStateToProps, mapDispatchToProps)(AllNames)
