@@ -7,13 +7,19 @@ export class AllNames extends React.Component {
     this.props.fetchNames()
   }
 
-  render(){
-    console.log(this.props)
-    return(
-      <h1>allNames</h1>
+  render() {
+    const {allNames} = this.props
+    return (
+      <div>
+        <h2>All Names</h2>
+        <ul>
+          {allNames.map(name => {
+            return <li key={name.id}>{name.name}</li>
+          })}
+        </ul>
+      </div>
     )
   }
-
 }
 
 const mapStateToProps = state => {
