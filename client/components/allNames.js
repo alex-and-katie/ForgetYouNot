@@ -10,13 +10,13 @@ export class AllNames extends React.Component {
   render() {
     const {allNames} = this.props
     return (
-      <div>
+      <div className="allNames">
         <h2>All Names</h2>
-        <ul>
+        <div className="nameList">
           {allNames.map(name => {
-            return <li key={name.id}>{name.name}</li>
+            return <li className="singleName" key={name.id}>{name.name}</li>
           })}
-        </ul>
+        </div>
       </div>
     )
   }
