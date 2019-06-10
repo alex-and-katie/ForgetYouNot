@@ -35,6 +35,23 @@ form div {
   justify-content: center;
 }
 
+.allNames {
+  text-align: center;
+}
+
+li {
+  list-style: none;
+}
+
+.nameList {
+  display: flex;
+  flex-direction: column;
+}
+
+.singleName {
+  padding: 0.25em
+}
+
 button {
   border: 0;
   /* background: #31ffd5; */

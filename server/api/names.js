@@ -4,6 +4,15 @@ const router = require('express').Router()
 const {Acquaintance} = require('../db/models')
 module.exports = router
 
+router.get('/', async (req, res, next) => {
+  try{
+    const names = await Acquaintance.findAll()
+    res.json(names)
+  } catch(err) {
+    next(err)
+  }
+})
+
 router.post('/', async (req, res, next) => {
   try {
     const name = await Acquaintance.create({
