@@ -4,12 +4,13 @@ import {fetchName} from '../store/singleName'
 
 export class SingleName extends React.Component {
   componentDidMount() {
-    this.props.fetchName()
+    const nameId = this.props.match.params.id
+    this.props.fetchName(nameId)
   }
 
   render() {
     console.log('PROPS IN SINGLENAME', this.props)
-    return(
+    return (
       <div>
         <h2>Single Name</h2>
       </div>

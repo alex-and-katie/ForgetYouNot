@@ -5,7 +5,6 @@ import {Link} from 'react-router-dom'
 
 export class AllNames extends React.Component {
   componentDidMount() {
-    console.log('id in compDidMount', this.props.match.params.id)
     this.props.fetchNames()
   }
 
@@ -18,7 +17,7 @@ export class AllNames extends React.Component {
         <div className="nameList">
           {allNames.map(name => {
             return (
-              <Link key={name.id} to="/singleName">
+              <Link key={name.id} to={`/names/${name.id}`}>
                 <li className="singleName" key={name.id}>
                   {name.name}
                 </li>
