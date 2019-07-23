@@ -5,10 +5,19 @@ const {Acquaintance} = require('../db/models')
 module.exports = router
 
 router.get('/', async (req, res, next) => {
-  try{
+  try {
     const names = await Acquaintance.findAll()
     res.json(names)
-  } catch(err) {
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.get('/:id', async (req, res, next) => {
+  try {
+    const name = await Acquaintance.findByPk(req.params.id)
+    res.json(name)
+  } catch (err) {
     next(err)
   }
 })
