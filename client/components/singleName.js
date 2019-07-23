@@ -9,7 +9,8 @@ export class SingleName extends React.Component {
   }
 
   render() {
-    console.log('PROPS IN SINGLENAME', this.props)
+    const {singleName} = this.props;
+    console.log('singleName', singleName)
     return (
       <div>
         <h2>Single Name</h2>

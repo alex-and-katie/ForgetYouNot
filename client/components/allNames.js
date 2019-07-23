@@ -10,7 +10,6 @@ export class AllNames extends React.Component {
 
   render() {
     const {allNames} = this.props
-    console.log('allNames', allNames)
     return (
       <div className="allNames">
         <h2>All Names</h2>
