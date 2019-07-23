@@ -27,7 +27,7 @@ class Routes extends Component {
             <Route path="/home" component={UserHome} />
             <Route exact path="/name" component={NewNameForm} />
             <Route exact path="/names" component={AllNames} />
-            <Route exact path="/singleName" component={SingleName} />
+            <Route exact path="/names/:id" component={SingleName} />
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}
