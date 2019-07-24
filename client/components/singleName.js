@@ -14,6 +14,7 @@ export class SingleName extends React.Component {
     return (
       <div>
         <h2>{singleName.name}</h2>
+        <p>Location: {singleName.location}</p>
         <p>Meeting Summary: {singleName.meetingSummary}</p>
       </div>
     )
