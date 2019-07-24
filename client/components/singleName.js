@@ -17,6 +17,7 @@ export class SingleName extends React.Component {
         <p>Location: {singleName.location}</p>
         <p>Date: {singleName.date}</p>
         <p>Meeting Summary: {singleName.meetingSummary}</p>
+        <p>Physical Description: {singleName.physicalDescription}</p>
       </div>
     )
   }
