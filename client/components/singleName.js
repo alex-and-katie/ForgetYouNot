@@ -18,6 +18,7 @@ export class SingleName extends React.Component {
         <p>Date: {singleName.date}</p>
         <p>Meeting Summary: {singleName.meetingSummary}</p>
         <p>Physical Description: {singleName.physicalDescription}</p>
+        {/* need to add audioPronunciation in correct format */}
       </div>
     )
   }
