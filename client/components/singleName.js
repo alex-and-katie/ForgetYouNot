@@ -13,7 +13,7 @@ export class SingleName extends React.Component {
     console.log('singleName', singleName)
     return (
       <div>
-        <h2>Single Name</h2>
+        <h2>{singleName.name}</h2>
       </div>
     )
   }
