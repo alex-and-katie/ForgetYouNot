@@ -1,6 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {fetchNames} from '../store/allNames'
+import {Link} from 'react-router-dom'
 
 export class AllNames extends React.Component {
   componentDidMount() {
@@ -14,7 +15,13 @@ export class AllNames extends React.Component {
         <h2>All Names</h2>
         <div className="nameList">
           {allNames.map(name => {
-            return <li className="singleName" key={name.id}>{name.name}</li>
+            return (
+              <Link key={name.id} to={`/names/${name.id}`}>
+                <li className="singleName" key={name.id}>
+                  {name.name}
+                </li>
+              </Link>
+            )
           })}
         </div>
       </div>
